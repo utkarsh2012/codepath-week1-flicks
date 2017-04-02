@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         topRatedViewController.tabBarItem.image = UIImage(named: "top-games-star")
 
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [nowPlayingViewController, topRatedViewController]
+        tabBarController.viewControllers = [nowPlayingNavigationController, topRatedNavigationController]
         
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
