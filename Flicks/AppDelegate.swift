@@ -16,6 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame:  UIScreen.main.bounds)
         
+        let color = UIColor(red:0.57, green:0.15, blue:0.98, alpha:1.00)
+        
+        UINavigationBar.appearance().tintColor = color
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : color]
+        
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         
         let nowPlayingNavigationController = storyBoard.instantiateViewController(withIdentifier: "MoviesNavigationController") as! UINavigationController
@@ -33,7 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [nowPlayingNavigationController, topRatedNavigationController]
-        
+        tabBarController.tabBar.tintColor = color
+
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
 
