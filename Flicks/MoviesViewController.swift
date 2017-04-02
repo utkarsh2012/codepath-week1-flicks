@@ -13,13 +13,17 @@ import MBProgressHUD
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var networkErrorView: UIView!
     var endpoint: String = ""
     var movies: [NSDictionary]?
+    var netWorkError: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.networkErrorView.isHidden = true
+        self.netWorkError = UIView(frame: CGRect(x: UIScreen.main.bounds.minX, y: UIScreen.main.bounds.minY + 65, width:  UIScreen.main.bounds.width, height: 14))
+        self.netWorkError?.backgroundColor = UIColor(red:0.57, green:0.15, blue:0.98, alpha:1.00)
+        self.netWorkError?.isHidden = true
+        self.view.addSubview(netWorkError!)
+
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
@@ -91,14 +95,21 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: { (dataOrNil, response, error) in
             if error != nil {
                 MBProgressHUD.hide(for: self.view, animated: true)
-                let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-                label.center = CGPoint(x: 160, y: 285)
+                self.netWorkError?.isHidden = false
+
+                let label = UILabel(frame: CGRect(x: (self.netWorkError?.bounds.minX)!, y: (self.netWorkError?.bounds.maxY)!-12, width: (self.netWorkError?.bounds.width)!, height: 12))
+                    
                 label.textAlignment = .center
                 label.text = "Network Error!"
-                self.networkErrorView.addSubview(label)
-                self.networkErrorView.isHidden = false
+                label.textColor = UIColor.white
+                label.font = label.font.withSize(10)
+
+                self.netWorkError?.addSubview(label)
+                refreshControl.endRefreshing()
             } else if let data = dataOrNil {
                 if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
+                    self.netWorkError?.isHidden = true
+
                     self.movies = responseDictionary["results"] as? [NSDictionary]
                     MBProgressHUD.hide(for: self.view, animated: true)
                     self.tableView.reloadData()

@@ -37,9 +37,13 @@ class MovieDetailViewController: UIViewController {
             bigPosterImage.setImageWith(imgUrl as URL!)
         }
         
-        UIView.animate(withDuration: 0.5, delay: 1, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: .curveEaseInOut, animations: {
-            self.infoView.frame.origin = self.defaultPoint
+        UIView.animate(withDuration: 0.2, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+            self.infoView.frame.origin = CGPoint(x: self.infoView.frame.origin.x, y: self.infoView.frame.origin.y - 60)
         }) { _ in
+            UIView.animate(withDuration: 0.5, delay: 1, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+                self.infoView.frame.origin = self.defaultPoint
+            }) { _ in
+            }
         }
         
         // Do any additional setup after loading the view.
