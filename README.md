@@ -32,17 +32,19 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://lh6.googleusercontent.com/fhMtU6G9yfpgQpSltjnkJSxVsWQOXJ-AiCCKTilBGo7J07WnR1SLtfDfoJcn3j4wYRhKkM8-hy54ad8=w3280-h1860' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+1. I was always confused between programmatically creating a UIView vs added it to a story board and use it. Creating an element is easier to work with but adding it to storyboard helps using the inspector in xcode. For example using Tab bar, "Network error" UIView.
+2. Need to understand the best way to find multiple sizes of images - "Assets" group needs 1x, 2x image sizes but nounproject only gives one size. How to get all the sizes the right way.
+3. Refactoring: xcode doesn't allow refactoring Swift code, really hard to improve code quality.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2017] [Utkarsh Sengar]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
